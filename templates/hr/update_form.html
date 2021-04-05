@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>사원 정보 수정</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</head>
+<body>
+{% set emp = data["emp"] %}
+<h1>사원 정보 수정</h1>
+<form action="/hr/update" method="post">
+    사원번호 : <input type="number" class="form-control" name="employee_id" value='{{emp["employee_id"]}}' readonly><br>
+    이름 :  <input type="text" class="form-control" name="first_name" value="{{emp['first_name']}}" required><br>
+    성 : <input type="text" class="form-control" name="last_name" value="{{emp['last_name']}}" required><br>
+    이메일 : <input type="text" class="form-control" name="email" value="{{emp['email']}}" required><br>
+    전화번호 : <input type="text" class="form-control" name="phone_number" value="{{emp['phone_number']}}" required><br>
+    입사일 : <input type="date" class="form-control" name="hire_date" value="{{emp['hire_date']}}" required><br>
+    직무아이디 :
+    <select name="job_id" class="custom-select">
+    {% for row in data["job_list"]%}
+        <option value="{{row[1]}}"
+                {% if row[1]==emp["job_id"] %}
+                selected
+                {% endif %}
+        >{{row[0]}}</option>
+    {% endfor %}
+    </select>
+    <br>
+    급여 : <input type="number" class="form-control" name="salary" value="{{emp['salary']}}" required><br>
+    보너스율 : <input type="text" class="form-control" name="commission_pct" value="{{emp['commission_pct']}}" required><br>
+    매니저아이디 :
+    <select name="manager_id" class="custom-select">
+    {% for row in data["manager_list"]%}
+        <option value="{{row[1]}}"
+                {% if row[1]==emp["manager_list"] %}
+                selected
+                {% endif %}
+        >{{row[0]}}</option>
+    {% endfor %}
+    </select>
+    <br>
+    부서번호 :
+    <select name="department_id" class="custom-select">
+    {% for row in data["dept_list"]%}
+        <option value="{{row[1]}}"
+                {% if row[1]==emp["dept_list"] %}
+                selected
+                {% endif %}
+        >{{row[0]}}</option>
+    {% endfor %}
+    </select>
+    <br>
+    <input type="submit" class="btn btn-primary" value="저장">
+    <input type="reset" class="btn btn-secondary" value="취소">
+
+</form>
+</body>
+</html>

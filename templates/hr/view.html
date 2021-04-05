@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>사원정보</title>
+</head>
+<body>
+<h1>사원 정보</h1>
+사원번호 : {{data["employee_id"]}}<br>
+이름 : {{data["first_name"]}} {{data["last_name"]}}<br>
+<br>
+{% for key, value in data.items() %}
+{{key}} : {{value}}<br>
+{% endfor %}
+
+</body>
+</html>

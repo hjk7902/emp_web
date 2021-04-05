@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>사원 정보 입력</title>
+</head>
+<body>
+<h1>사원 정보 입력</h1>
+<form action="/hr/insert" method="post">
+    사원번호 : <input type="number" name="employee_id" required><br>
+    이름 :  <input type="text" name="first_name" required><br>
+    성 : <input type="text" name="last_name" required><br>
+    이메일 : <input type="text" name="email" required><br>
+    전화번호 : <input type="text" name="phone_number" required><br>
+    입사일 : <input type="date" name="hire_date" required><br>
+    직무아이디 :
+    <select name="job_id">
+    {% for row in data["job_list"]%}
+        <option value="{{row[1]}}">{{row[0]}}</option>
+    {% endfor %}
+    </select>
+    <br>
+    급여 : <input type="number" name="salary" required><br>
+    보너스율 : <input type="text" name="commission_pct"><br>
+    매니저아이디 :
+    <select name="manager_id">
+    {% for row in data["manager_list"]%}
+        <option value="{{row[1]}}">{{row[1]}}|{{row[0]}}</option>
+    {% endfor %}
+    </select>
+    <br>
+    부서번호 :
+    <select name="department_id">
+    {% for row in data["dept_list"]%}
+        <option value="{{row[1]}}">{{row[0]}}</option>
+    {% endfor %}
+    </select>
+    <br>
+    <input type="submit" value="저장">
+    <input type="reset" value="취소">
+
+</form>
+</body>
+</html>
